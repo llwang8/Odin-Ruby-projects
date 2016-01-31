@@ -15,3 +15,26 @@
  #   => {"down"=>1, "how"=>2, "howdy"=>1,"go"=>1, "going"=>1, "it"=>2, "i"=> 3, "own"=>1,"part"=>1,"partner"=>1,"sit"=>1}
 
 
+def substring(words, arr)
+	results = {}
+	substring_pool = []
+	words_arr = []
+	words_arr = words.downcase.gsub("'", " ").split(" ")
+	words_arr.each do |word|
+		(1..word.length).each do |i|
+			(0..word.length - 1).each do |j|
+				substring_pool << word.slice(j, i)
+			end
+		end
+	end
+
+	arr.each do |a|
+		results[a] = (results[a] || 0 ) + 1 if substring_pool.include? a 
+	end
+	puts results
+end
+
+dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
+word = "below"
+words = "Howdy partner, sit down! How's it going?"
+substring(words, dictionary)
